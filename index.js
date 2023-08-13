@@ -9,7 +9,22 @@ const crypto = require('crypto')
 
 const path = require('path');
 
+// Configuração da conexão com o MongoDB
+const mongoURL = process.env.MONGODB_URL; // Certifique-se de definir a variável de ambiente MONGO_URL
+const mongooseOptions = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false
+};
 
+mongoose.connect(mongoURL, mongooseOptions)
+  .then(() => {
+    console.log('Conexão com o MongoDB estabelecida com sucesso.');
+  })
+  .catch((error) => {
+    console.error('Erro ao conectar ao MongoDB:', error);
+  });
 
 
 const app = express();
