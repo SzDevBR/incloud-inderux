@@ -313,6 +313,26 @@ app.get('/start-bot/:botId', async (req, res) => {
       prefix: bot.prefix // Use o prefixo do bot
     });
 
+    // Evento para verificar quando o bot está online
+botInstance.onMessage()
+
+botInstance.on("ready", () => {
+  isBotOnline = true;
+  console.log("Bot está online!");
+});
+
+// Evento para verificar quando o bot está offline
+botInstance.on("shardDisconnect", (shardID, code, reason) => {
+  isBotOnline = false;
+  console.log(`Bot está offline. Razão: ${reason}`);
+});
+
+// Verifique o estado do bot em intervalos regulares
+setInterval(() => {
+  // Verifique se o bot está online usando a variável isBotOnline
+  console.log(`O bot está ${isBotOnline ? 'online' : 'offline'}`);
+}, 60000); // Verifique a cada minuto
+
     // Recuperar os comandos associados a esse bot do banco de dados
     const commands = await Command.find({ botId: botId });
 
