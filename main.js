@@ -73,6 +73,14 @@ const Bot = mongoose.model('Bot', BotSchema);
 module.exports = Bot;
 const Bot = require('./models/bot'); // Importe o modelo definido anteriormente
 
+app.get('/create-bot', (req, res) => {
+  if (!req.isAuthenticated()) {
+    return res.redirect('/'); // Redirecionar para a página de login se não estiver autenticado
+  }
+
+  res.render('create-bot'); // Renderize a página de criação de bot
+});
+
 app.post('/create-bot', async (req, res) => {
   try {
     const { userId, token, prefix } = req.body;
