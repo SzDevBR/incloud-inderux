@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+</head>
+<body>
+  <h1>Dashboard</h1>
+  <p>Bem-vindo, <%= user.username %>!</p>
+  <p>ID do usuário: <%= user.id %></p>
+  
+  <% if (bot) { %>
+    <h2>Detalhes do Bot</h2>
+    <p>Token do Bot: <%= bot.token %></p>
+    <p>Prefixo: <%= bot.prefix %></p>
+    <!-- Adicione mais detalhes do bot conforme necessário -->
+  <% } else { %>
+    <p>Você ainda não configurou um bot.</p>
+    <!-- Adicione um formulário ou link para configurar um novo bot -->
+  <% } %>
+
+  <a href="/auth/logout">Sair</a>
+</body>
+</html>
