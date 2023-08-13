@@ -82,17 +82,6 @@ app.get('/auth/logout', (req, res) => {
 
 
 
-const BotSchema = new mongoose.Schema({
-  userId: { type: String, required: true },
-  token: { type: String, required: true },
-  prefix: { type: String, required: true },
-  // Outros campos que você desejar armazenar
-});
-
-module.exports = mongoose.model('Bot', BotSchema);
-
-
-module.exports = Bot;
 const Bot = require('./models/bot'); //Importe o modelo definido anteriormente
 
 app.get('/create-bot', (req, res) => {
