@@ -22,6 +22,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+
 passport.serializeUser((user, done) => {
   done(null, user);
 });
@@ -29,6 +30,9 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser((obj, done) => {
   done(null, obj);
 });
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
 passport.use(new DiscordStrategy({
   clientID: process.env.CLIENT_ID,
