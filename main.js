@@ -134,3 +134,91 @@ app.get('/my-bot/:userId', async (req, res) => {
     res.status(500).json({ message: 'Erro ao recuperar informações do bot.' });
   }
 });
+// Rota para exibir o formulário de criação de comandos
+app.get('/create-command', (req, res) => {
+  if (!req.isAuthenticated()) {
+    return res.redirect('/'); // Redirecionar para a página de login se não estiver autenticado
+  }
+
+  res.render('create-command'); // Renderize a página de criação de comandos
+});
+
+// Rota para processar o formulário de criação de comandos
+app.post('/create-command', async (req, res) => {
+  try {
+    const { botId, name, description, content } = req.body;
+
+    // Salvar os detalhes do novo comando no banco de dados
+    const newCommand = new Command({
+      botId: botId,
+      name: name,
+      description: description,
+      content: content
+    });
+    await newCommand.save();
+
+    // Redirecionar de volta para a página de dashboard ou outra página
+    res.redirect('/dashboard');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Erro ao criar o comando.');
+  }
+});
+// Rota para exibir o formulário de edição de comandos
+app.get('/edit-command/:commandId', async (req, res) => {
+  if (!req.isAuthenticated()) {
+    return res.redirect('/'); // Redirecionar para a página de login se não estiver autenticado
+  }
+
+  const commandId = req.params.commandId;
+
+  try {
+    // Recuperar os detalhes do comando do banco de dados
+    const command = await Command.findById(commandId);
+
+    if (!command) {
+      return res.redirect('/dashboard'); // Redirecionar se o comando não foi encontrado
+    }
+
+    res.render('edit-command', { command: command }); // Renderizar a página de edição de comandos
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Erro ao carregar a página de edição.');
+  }
+});
+
+// Rota para processar o formulário de edição de comandos
+app.post('/edit-command/:commandId', async (req, res) => {
+  const commandId = req.params.commandId;
+
+  try {
+    // Atualizar os detalhes do comando no banco de dados
+    await Command.findByIdAndUpdate(commandId, {
+      name: req.body.name,
+      description: req.body.description,
+      content: req.body.content
+    });
+
+    // Redirecionar de volta para a página de dashboard ou outra página
+    res.redirect('/dashboard');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Erro ao atualizar o comando.');
+  }
+});
+// Rota para remover um comando
+app.post('/remove-command/:commandId', async (req, res) => {
+  const commandId = req.params.commandId;
+
+  try {
+    // Remover o comando do banco de dados
+    await Command.findByIdAndRemove(commandId);
+
+    // Redirecionar de volta para a página de dashboard ou outra página
+    res.redirect('/dashboard');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Erro ao remover o comando.');
+  }
+});
+
