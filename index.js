@@ -69,9 +69,6 @@ app.get('/auth/logout', (req, res) => {
   res.redirect('/');
 });
 
-app.listen(3000, () => {
-  console.log('Servidor rodando em http://localhost:3000');
-});
 
 
 const BotSchema = new mongoose.Schema({
@@ -368,5 +365,8 @@ setInterval(() => {
   }
 });
 
+app.listen(3000, () => {
+  console.log('Servidor rodando em http://localhost:3000');
+});
 
 
