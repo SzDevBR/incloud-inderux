@@ -289,5 +289,51 @@ app.post('/remove-variable/:variableId', async (req, res) => {
     res.status(500).send('Erro ao remover a variável.');
   }
 });
+const { Aoijs } = require("aoi.js");
+
+// Rota para iniciar a aplicação do bot
+app.get('/start-bot/:botId', async (req, res) => {
+  if (!req.isAuthenticated()) {
+    return res.redirect('/'); // Redirecionar para a página de login se não estiver autenticado
+  }
+
+  const botId = req.params.botId;
+
+  try {
+    // Recuperar os detalhes do bot do banco de dados
+    const bot = await Bot.findById(botId);
+
+    if (!bot) {
+      return res.redirect('/dashboard'); // Redirecionar se o bot não foi encontrado
+    }
+
+    // Crie um novo bot usando aoi.js
+    const botInstance = new Aoijs.Bot({
+      token: bot.token, // Use o token do bot
+      prefix: bot.prefix // Use o prefixo do bot
+    });
+
+    // Recuperar os comandos associados a esse bot do banco de dados
+    const commands = await Command.find({ botId: botId });
+
+    // Adicionar os comandos ao bot
+    commands.forEach(command => {
+      botInstance.command({
+        name: command.name,
+        code: command.code
+      });
+    });
+
+    // Iniciar o bot
+    await botInstance.start();
+
+    // Redirecionar de volta para a página de dashboard ou outra página
+    res.redirect('/dashboard');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Erro ao iniciar o bot.');
+  }
+});
+
 
 
