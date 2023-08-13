@@ -57,7 +57,7 @@ app.get('/auth/callback', passport.authenticate('discord', {
 
 app.get('/dashboard', (req, res) => {
   if (!req.isAuthenticated()) {
-    return res.redirect('/'); // Redirecionar para a página de login se não estiver autenticado
+    return res.redirect('/auth/login'); // Redirecionar para a página de login se não estiver autenticado
   }
   
   res.render('dashboard', { user: req.user }); // Renderizar a view do dashboard
