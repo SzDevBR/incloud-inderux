@@ -245,3 +245,49 @@ app.post('/remove-command/:commandId', async (req, res) => {
   }
 });
 
+// Rota para exibir o formulário de criação de variáveis
+app.get('/create-variable', (req, res) => {
+  if (!req.isAuthenticated()) {
+    return res.redirect('/'); // Redirecionar para a página de login se não estiver autenticado
+  }
+
+  res.render('create-variable'); // Renderize a página de criação de variáveis
+});
+
+// Rota para processar o formulário de criação de variáveis
+app.post('/create-variable', async (req, res) => {
+  try {
+    const { botId, name, value } = req.body;
+
+    // Salvar os detalhes da nova variável no banco de dados
+    const newVariable = new Variable({
+      botId: botId,
+      name: name,
+      value: value
+    });
+    await newVariable.save();
+
+    // Redirecionar de volta para a página de dashboard ou outra página
+    res.redirect('/dashboard');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Erro ao criar a variável.');
+  }
+});
+// Rota para remover uma variável
+app.post('/remove-variable/:variableId', async (req, res) => {
+  const variableId = req.params.variableId;
+
+  try {
+    // Remover a variável do banco de dados
+    await Variable.findByIdAndRemove(variableId);
+
+    // Redirecionar de volta para a página de dashboard ou outra página
+    res.redirect('/dashboard');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Erro ao remover a variável.');
+  }
+});
+
+
