@@ -14,8 +14,6 @@ const mongoURL = process.env.MONGODB_URL; // Certifique-se de definir a variáve
 const mongooseOptions = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  useCreateIndex: true,
-  useFindAndModify: false
 };
 
 mongoose.connect(mongoURL, mongooseOptions)
