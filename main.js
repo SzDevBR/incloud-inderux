@@ -206,7 +206,30 @@ app.post('/edit-command/:commandId', async (req, res) => {
     res.status(500).send('Erro ao atualizar o comando.');
   }
 });
-// Rota para remover um comando
+// Rota para exibir a página de confirmação de remoção de comando
+app.get('/confirm-remove-command/:commandId', async (req, res) => {
+  if (!req.isAuthenticated()) {
+    return res.redirect('/'); // Redirecionar para a página de login se não estiver autenticado
+  }
+
+  const commandId = req.params.commandId;
+
+  try {
+    // Recuperar os detalhes do comando do banco de dados
+    const command = await Command.findById(commandId);
+
+    if (!command) {
+      return res.redirect('/dashboard'); // Redirecionar se o comando não foi encontrado
+    }
+
+    res.render('confirm-remove-command', { command: command }); // Renderizar a página de confirmação de remoção
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Erro ao carregar a página de confirmação de remoção.');
+  }
+});
+
+// Rota para processar a remoção de um comando
 app.post('/remove-command/:commandId', async (req, res) => {
   const commandId = req.params.commandId;
 
