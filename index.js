@@ -55,12 +55,20 @@ app.get('/auth/callback', passport.authenticate('discord', {
   res.redirect('/dashboard'); // Redirecionar para a página do dashboard após o login
 });
 
-app.get('/dashboard', (req, res) => {
+app.get('/dashboard', async (req, res) => {
   if (!req.isAuthenticated()) {
-    return res.redirect('/auth/login'); // Redirecionar para a página de login se não estiver autenticado
+    return res.redirect('/auth/login');
   }
   
-  res.render('dashboard', { user: req.user }); // Renderizar a view do dashboard
+  try {
+    const userId = req.user.id; // Supondo que você tenha uma propriedade 'id' no objeto 'user'
+    const bot = await Bot.findOne({ userId: userId }); // Recupere as informações do bot do banco de dados
+    
+    res.render('dashboard', { user: req.user, bot: bot }); // Passe 'bot' para a visualização
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Erro ao carregar a página de dashboard.');
+  }
 });
 
 app.get('/', (req, res) => {
@@ -84,7 +92,7 @@ const BotSchema = new mongoose.Schema({
 const Bot = mongoose.model('Bot', BotSchema);
 
 module.exports = Bot;
-//const Bot = require('./models/bot'); Importe o modelo definido anteriormente
+const Bot = require('./models/bot'); //Importe o modelo definido anteriormente
 
 app.get('/create-bot', (req, res) => {
   if (!req.isAuthenticated()) {
