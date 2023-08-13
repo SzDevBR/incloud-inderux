@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Confirmar Remoção de Comando</title>
+</head>
+<body>
+  <h1>Confirmar Remoção de Comando</h1>
+  <p>Você tem certeza de que deseja remover o comando "<%= command.name %>"?</p>
+  <form action="/remove-command/<%= command._id %>" method="post">
+    <button type="submit">Confirmar Remoção</button>
+  </form>
+  <a href="/dashboard">Cancelar</a>
+</body>
+</html>
