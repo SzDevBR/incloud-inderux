@@ -1,0 +1,20 @@
+{
+  "name": "seu-app",
+  "version": "1.0.0",
+  "description": "Descrição do seu aplicativo",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "mongoose": "^6.0.14",
+    "passport": "^0.5.0",
+    "passport-discord": "^0.1.5",
+    "dotenv": "^10.0.0",
+    "aoi.js": "^6.4.0"
+  },
+  "author": "Seu Nome",
+  "license": "ISC"
+}
