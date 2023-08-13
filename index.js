@@ -5,11 +5,16 @@ const passport = require('passport');
 const DiscordStrategy = require('passport-discord');
 const dotenv = require('dotenv');
 dotenv.config();
+const crypto = require('crypto');
+
 
 const app = express();
 
+const SESSION_SECRET = process.env.SESSION_SECRET || generateSessionSecret();
+
+
 app.use(session({
-  secret: 'seu_segredo_secreto',
+  secret: SESSION_SECRET,
   resave: false,
   saveUninitialized: false
 }));
