@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Editar Comando</title>
+</head>
+<body>
+  <h1>Editar Comando</h1>
+  <form action="/edit-command/<%= command._id %>" method="post">
+    <label for="name">Nome do Comando:</label>
+    <input type="text" id="name" name="name" value="<%= command.name %>" required><br>
+
+    <label for="description">Descrição:</label>
+    <input type="text" id="description" name="description" value="<%= command.description %>" required><br>
+
+    <label for="content">Conteúdo:</label>
+    <textarea id="content" name="content" rows="4" required><%= command.content %></textarea><br>
+
+    <button type="submit">Salvar Alterações</button>
+  </form>
+  <a href="/dashboard">Voltar ao Dashboard</a>
+</body>
+</html>
