@@ -100,7 +100,7 @@ app.get('/auth/logout', (req, res) => {
 
 
 
-const Bot = require('./models/bot'); //Importe o modelo definido anteriormente
+const bot = require('./models/bot'); // Verifique o caminho correto para o seu modelo Bot
 
 app.get('/create-bot', (req, res) => {
   if (!req.isAuthenticated()) {
