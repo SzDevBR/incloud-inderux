@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Criar Bot</title>
+</head>
+<body>
+  <h1>Criar Bot</h1>
+  <form method="post" action="/create-bot">
+    <label for="userId">ID do Usuário:</label>
+    <input type="text" name="userId" id="userId" required><br>
+    <label for="token">Token do Bot:</label>
+    <input type="text" name="token" id="token" required><br>
+    <label for="prefix">Prefixo do Bot:</label>
+    <input type="text" name="prefix" id="prefix" required><br>
+    <!-- Adicione mais campos, se necessário -->
+    <button type="submit">Criar Bot</button>
+  </form>
+  <a href="/dashboard">Voltar ao Dashboard</a>
+</body>
+</html>
