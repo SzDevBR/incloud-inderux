@@ -89,7 +89,8 @@ const BotSchema = new mongoose.Schema({
   // Outros campos que você desejar armazenar
 });
 
-const Bot = mongoose.model('Bot', BotSchema);
+module.exports = mongoose.model('Bot', BotSchema);
+
 
 module.exports = Bot;
 const Bot = require('./models/bot'); //Importe o modelo definido anteriormente
