@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Editar Variável</title>
+</head>
+<body>
+  <h1>Editar Variável</h1>
+  <form action="/edit-variable/<%= variable._id %>" method="post">
+    <label for="name">Nome da Variável:</label>
+    <input type="text" id="name" name="name" value="<%= variable.name %>" required><br>
+
+    <label for="value">Valor:</label>
+    <input type="text" id="value" name="value" value="<%= variable.value %>" required><br>
+
+    <button type="submit">Salvar Alterações</button>
+  </form>
+  <a href="/dashboard">Voltar ao Dashboard</a>
+</body>
+</html>
