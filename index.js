@@ -5,8 +5,7 @@ const passport = require('passport');
 const DiscordStrategy = require('passport-discord');
 const dotenv = require('dotenv');
 dotenv.config();
-const crypto = require('crypto');
-const path = require('path');
+const crypto = require('crypto')
 
 
 
