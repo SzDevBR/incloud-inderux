@@ -14,15 +14,15 @@
     <p>Prefixo: <%= bot.prefix %></p>
     <!-- Adicione mais detalhes do bot conforme necessário -->
     
-    <h2>Comandos</h2>
-    <% if (commands.length > 0) { %>
+    <h2>Variáveis</h2>
+    <% if (variables.length > 0) { %>
       <ul>
-        <% commands.forEach(command => { %>
-          <li><%= command.name %> - <%= command.description %> <a href="/edit-command/<%= command._id %>">Editar</a> | <a href="/remove-command/<%= command._id %>">Remover</a></li>
+        <% variables.forEach(variable => { %>
+          <li><%= variable.name %> - <%= variable.value %> <a href="/edit-variable/<%= variable._id %>">Editar</a> | <a href="/remove-variable/<%= variable._id %>">Remover</a></li>
         <% }); %>
       </ul>
     <% } else { %>
-      <p>Nenhum comando criado ainda.</p>
+      <p>Nenhuma variável criada ainda.</p>
     <% } %>
     
   <% } else { %>
