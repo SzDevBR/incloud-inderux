@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Comandos do Bot</title>
+</head>
+<body>
+  <h1>Comandos do Bot</h1>
+  <h2><%= bot.name %></h2>
+  <% if (commands.length > 0) { %>
+    <ul>
+      <% commands.forEach(command => { %>
+        <li>
+          <strong><%= command.name %></strong> - <%= command.description %><br>
+          Código: <%= command.code %><br>
+          <a href="/edit-command/<%= command._id %>">Editar</a> |
+          <a href="/remove-command/<%= command._id %>">Remover</a>
+        </li>
+      <% }); %>
+    </ul>
+  <% } else { %>
+    <p>Nenhum comando criado ainda.</p>
+  <% } %>
+  <a href="/dashboard">Voltar ao Dashboard</a>
+</body>
+</html>
