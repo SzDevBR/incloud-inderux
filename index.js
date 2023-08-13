@@ -27,6 +27,10 @@ mongoose.connect(mongoURL, mongooseOptions)
 
 const app = express();
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+
 const SESSION_SECRET = process.env.SESSION_SECRET || generateSessionSecret();
 
 
