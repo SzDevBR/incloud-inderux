@@ -6,6 +6,22 @@
 <body>
   <h1>Comandos do Bot</h1>
   <h2><%= bot.name %></h2>
+  
+  <!-- Formulário para criar um novo comando -->
+  <form action="/create-command" method="post">
+    <input type="hidden" name="botId" value="<%= bot._id %>">
+    <label for="newCommandName">Nome do Comando:</label>
+    <input type="text" id="newCommandName" name="name" required><br>
+    
+    <label for="newCommandDescription">Descrição:</label>
+    <input type="text" id="newCommandDescription" name="description" required><br>
+    
+    <label for="newCommandCode">Código do Comando:</label>
+    <textarea id="newCommandCode" name="code" rows="4" required></textarea><br>
+    
+    <button type="submit">Criar Comando</button>
+  </form>
+  
   <% if (commands.length > 0) { %>
     <ul>
       <% commands.forEach(command => { %>
