@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Criar Comando</title>
+</head>
+<body>
+  <h1>Criar Comando</h1>
+  <form action="/create-command" method="post">
+    <label for="name">Nome do Comando:</label>
+    <input type="text" id="name" name="name" required><br>
+
+    <label for="description">Descrição:</label>
+    <input type="text" id="description" name="description" required><br>
+
+    <label for="content">Conteúdo:</label>
+    <textarea id="content" name="content" rows="4" required></textarea><br>
+
+    <input type="hidden" name="botId" value="<%= user.botId %>"> <!-- Suponha que você tenha uma propriedade 'botId' no objeto 'user' -->
+    <button type="submit">Criar Comando</button>
+  </form>
+  <a href="/dashboard">Voltar ao Dashboard</a>
+</body>
+</html>
