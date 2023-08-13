@@ -76,7 +76,7 @@ const BotSchema = new mongoose.Schema({
 const Bot = mongoose.model('Bot', BotSchema);
 
 module.exports = Bot;
-//const Bot = require('./models/bot'); // Importe o modelo definido anteriormente
+//const Bot = require('./models/bot'); Importe o modelo definido anteriormente
 
 app.get('/create-bot', (req, res) => {
   if (!req.isAuthenticated()) {
