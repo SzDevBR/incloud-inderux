@@ -50,7 +50,7 @@ passport.use(new DiscordStrategy({
 app.get('/auth/login', passport.authenticate('discord'));
 
 app.get('/auth/callback', passport.authenticate('discord', {
-  failureRedirect: '/'
+  failureRedirect: '/' // Redirecionar em caso de falha
 }), (req, res) => {
   res.redirect('/dashboard'); // Redirecionar para a página do dashboard após o login
 });
