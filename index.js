@@ -55,6 +55,9 @@ app.get('/dashboard', (req, res) => {
   res.render('dashboard', { user: req.user }); // Renderizar a view do dashboard
 });
 
+app.get('/', (req, res) => {
+  res.render('index'); // Renderiza a visualização index.ejs
+});
 
 app.get('/auth/logout', (req, res) => {
   req.logout();
