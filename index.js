@@ -7,7 +7,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 const crypto = require('crypto')
 const Bot = require('./models/bot'); // Importe o modelo Bot
-const dbd = require("dbd.js")
+const Aoijs = require("aoi.js")
 
 
 const path = require('path');
