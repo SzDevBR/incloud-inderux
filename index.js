@@ -118,9 +118,10 @@ app.post('/create-bot', async (req, res) => {
     const { userId, token, prefix } = req.body;
 
     // Crie um novo bot usando aoi.js
-    const botInstance = new Aoijs.Bot({
+    const bot = new Aoijs.Bot({
       token: token, // Use o token do bot
-      prefix: prefix || defaultPrefix // Use o prefixo do bot ou o prefixo padrão
+      prefix: prefix,
+      intents: all // Use o prefixo do bot ou o prefixo padrão
     });
 
     // Salve as informações do bot no banco de dados
@@ -133,7 +134,7 @@ app.post('/create-bot', async (req, res) => {
     await newBot.save();
 
     // Inicie o bot
-    botInstance.onMessage();
+    bot.onMessage();
 
     // Responda ao usuário com sucesso
     res.status(200).json({ message: 'Bot criado com sucesso!' });
@@ -156,7 +157,8 @@ app.get('/my-bot/:userId', async (req, res) => {
     // Crie uma instância do bot com as informações do banco de dados
     const aoiBot = new Aoijs.Bot({
       token: bot.token,
-      prefix: bot.prefix
+      prefix: bot.prefix,
+      intents: all
     });
 
     // Responda ao usuário com informações do bot ou execute outras ações
@@ -341,7 +343,8 @@ app.get('/start-bot/:botId', async (req, res) => {
     // Crie um novo bot usando aoi.js
     const botInstance = new Aoijs.Bot({
       token: bot.token, // Use o token do bot
-      prefix: bot.prefix // Use o prefixo do bot
+      prefix: bot.prefix,
+      intents: all
     });
 
     // Evento para verificar quando o bot está online
