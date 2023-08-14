@@ -119,8 +119,8 @@ app.post('/create-bot', async (req, res) => {
 
     // Crie um novo bot usando aoi.js
     const botInstance = new Aoijs.Bot({
-      token: bot.token, // Use o token do bot
-      prefix: bot.prefix || defaultPrefix // Use o prefixo do bot ou o prefixo padrão
+      token: token, // Use o token do bot
+      prefix: prefix || defaultPrefix // Use o prefixo do bot ou o prefixo padrão
     });
 
     // Salve as informações do bot no banco de dados
