@@ -73,8 +73,6 @@ app.get('/auth/callback', passport.authenticate('discord', {
   res.redirect('/dashboard'); // Redirecionar para a página do dashboard após o login
 });
 
-const Bot = require('./models/bot'); // Verifique o caminho correto para o seu modelo Bot
-
 app.get('/dashboard', async (req, res) => {
   if (!req.isAuthenticated()) {
     return res.redirect('/auth/login');
@@ -110,6 +108,8 @@ app.get('/create-bot', (req, res) => {
 
   res.render('create-bot'); // Renderize a página de criação de bot
 });
+
+const Bot = require('./models/bot.js');
 
 app.post('/create-bot', async (req, res) => {
   try {
