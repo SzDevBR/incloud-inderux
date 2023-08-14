@@ -321,7 +321,6 @@ app.post('/remove-variable/:variableId', async (req, res) => {
     res.status(500).send('Erro ao remover a variável.');
   }
 });
-const { Aoijs } = require("dbd.js");
 
 // Rota para iniciar a aplicação do bot
 app.get('/start-bot/:botId', async (req, res) => {
