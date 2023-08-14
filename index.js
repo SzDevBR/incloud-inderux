@@ -121,7 +121,7 @@ app.post('/create-bot', async (req, res) => {
     const bot = new Aoijs.Bot({
       token: token, // Use o token do bot
       prefix: prefix,
-      intents: all // Use o prefixo do bot ou o prefixo padrão
+      intents: ["MessageContent", "Guilds", "GuildMessages"], // Use o prefixo do bot ou o prefixo padrão
     });
 
     // Salve as informações do bot no banco de dados
@@ -158,7 +158,7 @@ app.get('/my-bot/:userId', async (req, res) => {
     const aoiBot = new Aoijs.Bot({
       token: bot.token,
       prefix: bot.prefix,
-      intents: all
+      intents: ["MessageContent", "Guilds", "GuildMessages"],
     });
 
     // Responda ao usuário com informações do bot ou execute outras ações
@@ -344,7 +344,7 @@ app.get('/start-bot/:botId', async (req, res) => {
     const botInstance = new Aoijs.Bot({
       token: bot.token, // Use o token do bot
       prefix: bot.prefix,
-      intents: all
+      intents: ["MessageContent", "Guilds", "GuildMessages"],
     });
 
     // Evento para verificar quando o bot está online
