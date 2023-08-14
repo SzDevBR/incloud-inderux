@@ -6,6 +6,8 @@ const DiscordStrategy = require('passport-discord');
 const dotenv = require('dotenv');
 dotenv.config();
 const crypto = require('crypto')
+const Bot = require('./models/bot'); // Importe o modelo Bot
+
 
 const path = require('path');
 
@@ -109,16 +111,15 @@ app.get('/create-bot', (req, res) => {
   res.render('create-bot'); // Renderize a página de criação de bot
 });
 
-const Bot = require('./models/bot.js');
 
 app.post('/create-bot', async (req, res) => {
   try {
     const { userId, token, prefix } = req.body;
 
-    // Crie uma instância do bot usando a biblioteca aoi.js
-    const bot = new Aoijs.Bot({
-      token: token,
-      prefix: prefix
+    // Crie um novo bot usando aoi.js
+    const botInstance = new Aoijs.Bot({
+      token: bot.token, // Use o token do bot
+      prefix: bot.prefix || defaultPrefix // Use o prefixo do bot ou o prefixo padrão
     });
 
     // Salve as informações do bot no banco de dados
@@ -131,7 +132,7 @@ app.post('/create-bot', async (req, res) => {
     await newBot.save();
 
     // Inicie o bot
-    bot.onMessage();
+    botInstance.onMessage();
 
     // Responda ao usuário com sucesso
     res.status(200).json({ message: 'Bot criado com sucesso!' });
